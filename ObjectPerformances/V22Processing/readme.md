@@ -50,6 +50,8 @@ The columns are
 
 You can see the full history of config files [here](https://docs.google.com/spreadsheets/d/14CVVhA6ITSTmv0x0Z2BRJ7cLgMKabi6TWsDXbyffGBg/edit#gid=462890739)
 
+Export sheet as tab-separated file to use as input to the code.
+
 
 # Typical run sequence 
 
