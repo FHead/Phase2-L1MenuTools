@@ -1,4 +1,5 @@
 Config     = config/20220412.config
+TestConfig = config/20220412Test.config
 
 default: Prepare Execute
 
@@ -42,7 +43,7 @@ library/HelperFunctions.o: source/HelperFunctions.cpp include/HelperFunctions.h
 
 RunTest: Execute
 	./Execute --input `ls samples/DYLLV22/* | head -n 5 | tr '\n' ',' | sed "s/,$$//g"` \
-		--output TestRun.root --StoredGen true --config $(Config) --LDROnly true
+		--output TestRun.root --StoredGen true --config $(TestConfig) --LDROnly true
 
 RunLDR: Execute
 	./Execute --input `ls samples/DYLLV22/* | head -n 40 | tr '\n' ',' | sed "s/,$$//g"` \
