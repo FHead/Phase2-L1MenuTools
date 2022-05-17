@@ -56,7 +56,7 @@ All the scripts are in the `scripts/` folder.  You can see various scripts makin
 
 We make the plots and read the numbers by eye!  See V22LDRPlots.sh and V22IsoPlots.sh for more concrete examples
 
-
+Say more about the isolation working point percentage and the LDR things
 
 
 # Code
