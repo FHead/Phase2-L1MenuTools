@@ -142,22 +142,22 @@ RunV22Tau: Execute
 		--reference 0.50 --DoCaloTau true
 	./Execute --input $(HHBBTauTauV22) --output Fits/V22_Fits_CaloTau090.pdf     --curves $(V22DH) \
 		--prefix 090 --reference 0.90 --DoCaloTau true
-	# ./Execute --input $(VBFHTauTauV22) --output Fits/V22_Fits_NNTau.pdf          --curves $(V22DH) \
-	# 	--reference 0.50 --DoNNTauLoose true
-	# ./Execute --input $(VBFHTauTauV22) --output Fits/V22_Fits_NNTau2Vtx.pdf      --curves $(V22DH) \
-	# 	--reference 0.50 --DoNNTau2VtxLoose true
-	# ./Execute --input $(VBFHTauTauV22) --output Fits/V22_Fits_NNTau090.pdf       --curves $(V22DH) \
-	# 	--prefix 090 --reference 0.90 --DoNNTauLoose true
-	# ./Execute --input $(VBFHTauTauV22) --output Fits/V22_Fits_NNTau2Vtx090.pdf   --curves $(V22DH) \
-	# 	--prefix 090 --reference 0.90 --DoNNTau2VtxLoose true
-	# ./Execute --input $(HHBBTauTauV22) --output Fits/V22_Fits_HHNNTau.pdf        --curves $(V22DH) \
-	# 	--prefix HH --reference 0.50 --DoNNTauLoose true
-	# ./Execute --input $(HHBBTauTauV22) --output Fits/V22_Fits_HHNNTau2Vtx.pdf    --curves $(V22DH) \
-	# 	--prefix HH --reference 0.50 --DoNNTau2VtxLoose true
-	# ./Execute --input $(HHBBTauTauV22) --output Fits/V22_Fits_HHNNTau090.pdf     --curves $(V22DH) \
-	# 	--prefix 090HH --reference 0.90 --DoNNTauLoose true
-	# ./Execute --input $(HHBBTauTauV22) --output Fits/V22_Fits_HHNNTau2Vtx090.pdf --curves $(V22DH) \
-	# 	--prefix 090HH --reference 0.90 --DoNNTau2VtxLoose true
+	./Execute --input $(VBFHTauTauV22) --output Fits/V22_Fits_NNTau.pdf          --curves $(V22DH) \
+		--reference 0.50 --DoNNTauLoose true
+	./Execute --input $(VBFHTauTauV22) --output Fits/V22_Fits_NNTau2Vtx.pdf      --curves $(V22DH) \
+		--reference 0.50 --DoNNTau2VtxLoose true
+	./Execute --input $(VBFHTauTauV22) --output Fits/V22_Fits_NNTau090.pdf       --curves $(V22DH) \
+		--prefix 090 --reference 0.90 --DoNNTauLoose true
+	./Execute --input $(VBFHTauTauV22) --output Fits/V22_Fits_NNTau2Vtx090.pdf   --curves $(V22DH) \
+		--prefix 090 --reference 0.90 --DoNNTau2VtxLoose true
+	./Execute --input $(HHBBTauTauV22) --output Fits/V22_Fits_HHNNTau.pdf        --curves $(V22DH) \
+		--prefix HH --reference 0.50 --DoNNTauLoose true
+	./Execute --input $(HHBBTauTauV22) --output Fits/V22_Fits_HHNNTau2Vtx.pdf    --curves $(V22DH) \
+		--prefix HH --reference 0.50 --DoNNTau2VtxLoose true
+	./Execute --input $(HHBBTauTauV22) --output Fits/V22_Fits_HHNNTau090.pdf     --curves $(V22DH) \
+		--prefix 090HH --reference 0.90 --DoNNTauLoose true
+	./Execute --input $(HHBBTauTauV22) --output Fits/V22_Fits_HHNNTau2Vtx090.pdf --curves $(V22DH) \
+		--prefix 090HH --reference 0.90 --DoNNTau2VtxLoose true
 
 RunV20V21: Execute
 	./Execute --input $(VBFHTauTauV21) --output Fits/V21_Fits_NNTau.pdf          --curves $(V21DH) \
