@@ -31,7 +31,7 @@ Then we set an environment variable
 export ProjectBase=`pwd`
 ```
 
-(or `csh` equivalent)
+(or `csh` equivalent)    The variable should point to this `ObjectPerfomances` folder.
 
 Then...simply type
 
