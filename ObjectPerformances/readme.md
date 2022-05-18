@@ -48,7 +48,7 @@ make CleanAll
 ```
 
 
-## Running the code
+## Running the code: example
 
 First compile everything!  Then to reproduce V22 plots...
 
