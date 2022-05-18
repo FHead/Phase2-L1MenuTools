@@ -598,6 +598,7 @@ int main(int argc, char *argv[])
       ObjectHistograms[i]->Write(Directories[i]);
 
    // Clean up
+   gROOT->GetListOfFiles()->Remove(&OutputFile);
    OutputFile.Close();
 
    // Yay
