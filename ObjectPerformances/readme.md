@@ -65,11 +65,16 @@ to process the DYLL sample.  There are also TTbar, VBFHTauTau, HGG, HHBBTauTau. 
 Once done, move the output files to some common location following the convention.  So far I am putting them at 
 `/eos/user/c/chenyi/BatchOutput/PhysicsWorkspace/L1TriggerUpgrade2018/TriggerTurnOn/21732_BasicTurnOnV10///`, it should be soft linked to the folder as `Outputs/`.  For V22 since I have run this step already, you should find the root files there and we can just verify that your files look the same as what I got.
 
+### Efficiencies
+
 Then go to `Efficiency` folder and run one of the many scripts for V22.  For example
 
 `bash scripts/V22JetHTMETMHTPlots.sh`
 
 The outputs will be written to the `Plots/` folder.  There are also many others, feel free to run them as well.
+
+
+### Scalings
 
 Finally go to the `TurnOnScaling` folder and calculate the scalings.  First do
 
