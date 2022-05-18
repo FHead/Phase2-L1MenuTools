@@ -50,7 +50,47 @@ make CleanAll
 
 ## Running the code
 
-Talk about how to run the code
+First compile everything!  Then to reproduce V22 plots...
+
+### V22Processing
+
+Go in to the processing directory and do 
+
+```
+make RunDYLL
+```
+
+to process the DYLL sample.  There are also TTbar, VBFHTauTau, HGG, HHBBTauTau.  See `makefile` to see what is there.
+
+Once done, move the output files to some common location following the convention.  So far I am putting them at 
+`/eos/user/c/chenyi/BatchOutput/PhysicsWorkspace/L1TriggerUpgrade2018/TriggerTurnOn/21732_BasicTurnOnV10///`, it should be soft linked to the folder as `Outputs/`
+
+Then go to `Efficiency` folder and run one of the many scripts for V22.  For example
+
+`bash scripts/V22JetHTMETMHTPlots.sh`
+
+The outputs will be written to the `Plots/` folder.  There are also many others, feel free to run them as well.
+
+Finally go to the `TurnOnScaling` folder and calculate the scalings.  First do
+
+```
+make RunV22
+```
+
+to fit everything.  Then check the fits in the `Fits/` folder to make sure things look reasonable.  Once happy, make the beautiful scaling plots
+
+```
+bash scripts/V22JetHTMHTMETPlots.sh
+```
+
+There are also some others in the scripts folder.  The scaling text file can be exported as 
+
+```
+make RunExport
+```
+
+It will be stored in the `Txt/` folder.
+
 
 
 

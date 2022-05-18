@@ -74,38 +74,38 @@ RunV10STAMuon: Execute
 RunV22: RunV22Tau RunV22Muon RunV22EG RunV22JetHT
 
 RunV22JetHT: Execute
-	# ./Execute --input $(TTbarV22)   --output Fits/V22_Fits_Phase1PuppiJet.pdf   --curves $(V22DH) \
-	# 	--reference 0.95 --DoPhase1PuppiJet true
-	# ./Execute --input $(TTbarV22)   --output Fits/V22_Fits_Phase1PuppiHT.pdf    --curves $(V22DH) \
-	# 	--reference 0.50 --DoPhase1PuppiHT true
-	# ./Execute --input $(TTbarV22)   --output Fits/V22_Fits_Phase1PuppiMHT.pdf   --curves $(V22DH) \
-	# 	--reference 0.50 --DoPhase1PuppiMHT true
-	# ./Execute --input $(TTbarV22)   --output Fits/V22_Fits_Phase1PuppiMHT090.pdf   --curves $(V22DH) \
-	# 	--prefix 090 --reference 0.90 --DoPhase1PuppiMHT true
-	# ./Execute --input $(TTbarV22)   --output Fits/V22_Fits_PuppiMET.pdf         --curves $(V22DH) \
-	# 	--reference 0.50 --DoPuppiMET true
-	# ./Execute --input $(TTbarV22)   --output Fits/V22_Fits090_Phase1PuppiHT.pdf --curves $(V22DH) \
-	# 	--prefix 090 --reference 0.90 --DoPhase1PuppiHT true
-	# ./Execute --input $(TTbarV22)   --output Fits/V22_Fits090_PuppiMET.pdf      --curves $(V22DH) \
-	# 	--prefix 090 --reference 0.90 --DoPuppiMET true
-	# ./Execute --input $(TTbarV22) --output Fits/V22_Fits_CaloJet.pdf            --curves $(V22DH) \
-	# 	--reference 0.95 --DoCaloJet true
-	# ./Execute --input $(TTbarV22) --output Fits/V22_Fits_TrackerJet.pdf         --curves $(V22DH) \
-	# 	--reference 0.95 --DoTrackerJet true
-	# ./Execute --input $(TTbarV22) --output Fits/V22_Fits_TrackerHT.pdf          --curves $(V22DH) \
-	# 	--reference 0.50 --DoTrackerHT true
-	# ./Execute --input $(TTbarV22) --output Fits/V22_Fits_TrackerMHT.pdf         --curves $(V22DH) \
-	# 	--reference 0.50 --DoTrackerMHT true
-	# ./Execute --input $(TTbarV22) --output Fits/V22_Fits_TrackerMHT090.pdf      --curves $(V22DH) \
-	# 	--prefix 090 --reference 0.90 --DoTrackerMHT true
-	# ./Execute --input $(TTbarV22) --output Fits/V22_Fits_TrackerMET.pdf         --curves $(V22DH) \
-	# 	--reference 0.50 --DoTrackerMET true
-	# ./Execute --input $(TTbarV22) --output Fits/V22_Fits090_TrackerHT.pdf       --curves $(V22DH) \
-	# 	--prefix 090 --reference 0.90 --DoTrackerHT true
-	# ./Execute --input $(TTbarV22) --output Fits/V22_Fits090_TrackerMET.pdf      --curves $(V22DH) \
-	# 	--prefix 090 --reference 0.90 --DoTrackerMET true
-	# ./Execute --input $(TTbarV22) --output Fits/V22_Fits_SeededConePuppiJet.pdf --curves $(V22DH) \
-	# 	--reference 0.95 --DoSeededConePuppiJet true
+	./Execute --input $(TTbarV22)   --output Fits/V22_Fits_Phase1PuppiJet.pdf   --curves $(V22DH) \
+		--reference 0.95 --DoPhase1PuppiJet true
+	./Execute --input $(TTbarV22)   --output Fits/V22_Fits_Phase1PuppiHT.pdf    --curves $(V22DH) \
+		--reference 0.50 --DoPhase1PuppiHT true
+	./Execute --input $(TTbarV22)   --output Fits/V22_Fits_Phase1PuppiMHT.pdf   --curves $(V22DH) \
+		--reference 0.50 --DoPhase1PuppiMHT true
+	./Execute --input $(TTbarV22)   --output Fits/V22_Fits_Phase1PuppiMHT090.pdf   --curves $(V22DH) \
+		--prefix 090 --reference 0.90 --DoPhase1PuppiMHT true
+	./Execute --input $(TTbarV22)   --output Fits/V22_Fits_PuppiMET.pdf         --curves $(V22DH) \
+		--reference 0.50 --DoPuppiMET true
+	./Execute --input $(TTbarV22)   --output Fits/V22_Fits090_Phase1PuppiHT.pdf --curves $(V22DH) \
+		--prefix 090 --reference 0.90 --DoPhase1PuppiHT true
+	./Execute --input $(TTbarV22)   --output Fits/V22_Fits090_PuppiMET.pdf      --curves $(V22DH) \
+		--prefix 090 --reference 0.90 --DoPuppiMET true
+	./Execute --input $(TTbarV22) --output Fits/V22_Fits_CaloJet.pdf            --curves $(V22DH) \
+		--reference 0.95 --DoCaloJet true
+	./Execute --input $(TTbarV22) --output Fits/V22_Fits_TrackerJet.pdf         --curves $(V22DH) \
+		--reference 0.95 --DoTrackerJet true
+	./Execute --input $(TTbarV22) --output Fits/V22_Fits_TrackerHT.pdf          --curves $(V22DH) \
+		--reference 0.50 --DoTrackerHT true
+	./Execute --input $(TTbarV22) --output Fits/V22_Fits_TrackerMHT.pdf         --curves $(V22DH) \
+		--reference 0.50 --DoTrackerMHT true
+	./Execute --input $(TTbarV22) --output Fits/V22_Fits_TrackerMHT090.pdf      --curves $(V22DH) \
+		--prefix 090 --reference 0.90 --DoTrackerMHT true
+	./Execute --input $(TTbarV22) --output Fits/V22_Fits_TrackerMET.pdf         --curves $(V22DH) \
+		--reference 0.50 --DoTrackerMET true
+	./Execute --input $(TTbarV22) --output Fits/V22_Fits090_TrackerHT.pdf       --curves $(V22DH) \
+		--prefix 090 --reference 0.90 --DoTrackerHT true
+	./Execute --input $(TTbarV22) --output Fits/V22_Fits090_TrackerMET.pdf      --curves $(V22DH) \
+		--prefix 090 --reference 0.90 --DoTrackerMET true
+	./Execute --input $(TTbarV22) --output Fits/V22_Fits_SeededConePuppiJet.pdf --curves $(V22DH) \
+		--reference 0.95 --DoSeededConePuppiJet true
 	./Execute --input $(TTbarV22) --output Fits/V22_Fits_CaloHT.pdf             --curves $(V22DH) \
 		--reference 0.50 --DoCaloHT true
 	./Execute --input $(TTbarV22) --output Fits/V22_Fits_CaloHT090.pdf          --curves $(V22DH) \

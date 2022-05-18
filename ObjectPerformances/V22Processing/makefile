@@ -8,6 +8,7 @@ Clean:
 	rm -f source/L1Classes.cpp source/L1Classes_rdict.pcm
 	rm -f samples/*
 	rm -f Execute
+	rm -f Outputs
 
 Prepare:
 	mkdir -p samples
@@ -17,6 +18,7 @@ Prepare:
 	ln -sf /eos/cms/store/cmst3/group/l1tr/phase2Menu/EmuDev/GluGluToHHTo2B2Tau_node_SM_TuneCP5_14TeV-madgraph-pythia8/GGToHHTo2B2Tau_PU200_v22/220408_073133/0000// samples/HHBBTauTauV22
 	ln -sf /eos/cms/store/cmst3/group/l1tr/phase2Menu/EmuDev/TT_TuneCP5_14TeV-powheg-pythia8/TT_PU200_v22/220407_094308/0000// samples/TTbarV22
 	ln -sf /eos/cms/store/cmst3/group/l1tr/phase2Menu/EmuDev/VBFHToTauTau_M125_14TeV_powheg_pythia8_correctedGridpack_tuneCP5/VBFToTauTau_PU200_v22/220407_095503/0000// samples/VBFHTauTauV22
+	ln -sf /eos/user/c/chenyi/BatchOutput/PhysicsWorkspace/L1TriggerUpgrade2018/TriggerTurnOn/21732_BasicTurnOnV10/// Outputs
 
 Execute: source/FillHistograms.cpp library/Histograms.o library/HelperFunctions.o library/L1Classes.so library/Messenger.o
 	g++ `root-config --cflags --glibs` source/FillHistograms.cpp -Iinclude -I$(ProjectBase)/CommonCode/include -o Execute \
