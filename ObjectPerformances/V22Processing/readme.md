@@ -63,7 +63,7 @@ We usually run this multiple times, each time updating the config in various pla
 
 Once we run through the last step, we store the root files in some shared place with proper naming convention.  So far the convention is `SAMPLE_VERSION_CONFIGVERSION.root`.  Note once we put files there we don't touch the config anymore, otherwise things are not traceable and can lead to chaos.
 
-All the recent results are stored on eos here /eos/user/c/chenyi/BatchOutput/PhysicsWorkspace/L1TriggerUpgrade2018/TriggerTurnOn/21732_BasicTurnOnV10/
+All the recent results are stored on eos here /eos/cms/store/group/dpg_trigger/comm_trigger/L1Trigger/chenyi/EfficiencyOutputs
 
 
 

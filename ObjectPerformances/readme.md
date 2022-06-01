@@ -63,7 +63,7 @@ make RunDYLL
 to process the DYLL sample.  There are also TTbar, VBFHTauTau, HGG, HHBBTauTau.  See `makefile` to see what is there.
 
 Once done, move the output files to some common location following the convention.  So far I am putting them at 
-`/eos/user/c/chenyi/BatchOutput/PhysicsWorkspace/L1TriggerUpgrade2018/TriggerTurnOn/21732_BasicTurnOnV10///`, it should be soft linked to the folder as `Outputs/`.  For V22 since I have run this step already, you should find the root files there and we can just verify that your files look the same as what I got.
+`/eos/cms/store/group/dpg_trigger/comm_trigger/L1Trigger/chenyi/EfficiencyOutputs`, it should be soft linked to the folder as `Outputs/`.  For V22 since I have run this step already, you should find the root files there and we can just verify that your files look the same as what I got.
 
 ### Efficiencies
 
