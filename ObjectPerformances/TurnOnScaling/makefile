@@ -43,7 +43,9 @@ default: Prepare Execute ExecutePlot Export
 
 Prepare:
 	mkdir -p DH Fits Plots Text
+	rm -f Outputs
 	ln -sf $(ProjectBase)/CommonCode/DHQuery .
+	ln -sf /eos/cms/store/group/dpg_trigger/comm_trigger/L1Trigger/chenyi/EfficiencyOutputs Outputs
 
 Clean:
 	rm -f Execute ExecutePlot Export DHQuery
