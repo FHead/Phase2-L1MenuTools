@@ -1,5 +1,5 @@
 
-# Efficiency
+# Scalings
 
 The code here derives scalings!
 
