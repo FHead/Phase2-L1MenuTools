@@ -45,47 +45,47 @@ library/HelperFunctions.o: source/HelperFunctions.cpp include/HelperFunctions.h
 		-I$(ProjectBase)/CommonCode/include -Iinclude `fastjet-config --cxxflags` -std=c++17
 
 RunTest: Execute
-	./Execute --input `ls samples/DYLLV22/* | head -n 5 | tr '\n' ',' | sed "s/,$$//g"` \
+	./Execute --input `ls samples/DYLLV22/*root | head -n 5 | tr '\n' ',' | sed "s/,$$//g"` \
 		--output TestRun.root --StoredGen true --config $(TestConfig) --LDROnly true
 
 RunLDR: Execute
-	./Execute --input `ls samples/DYLLV22/* | head -n 40 | tr '\n' ',' | sed "s/,$$//g"` \
+	./Execute --input `ls samples/DYLLV22/*root | head -n 40 | tr '\n' ',' | sed "s/,$$//g"` \
 		--output DYLLLDR_V22.root --StoredGen true --config $(Config) --LDROnly true
-	./Execute --input `ls samples/TTbarV22/* | head -n 40 | tr '\n' ',' | sed "s/,$$//g"` \
+	./Execute --input `ls samples/TTbarV22/*root | head -n 40 | tr '\n' ',' | sed "s/,$$//g"` \
 		--output TTbarLDR_V22.root --StoredGen true --config $(Config) --LDROnly true
-	./Execute --input `ls samples/VBFHTauTauV22/* | head -n 40 | tr '\n' ',' | sed "s/,$$//g"` \
+	./Execute --input `ls samples/VBFHTauTauV22/*root | head -n 40 | tr '\n' ',' | sed "s/,$$//g"` \
 		--output VBFHTauTauLDR_V22.root --StoredGen true --config $(Config) --LDROnly true
-	./Execute --input `ls samples/VBFHTauTauV22/* | head -n 40 | tr '\n' ',' | sed "s/,$$//g"` \
+	./Execute --input `ls samples/VBFHTauTauV22/*root | head -n 40 | tr '\n' ',' | sed "s/,$$//g"` \
 		--output VBFHTauTauLDR_V22.root --StoredGen true --config $(Config) --LDROnly true
-	./Execute --input `ls samples/HHBBTauTauV22/* | head -n 40 | tr '\n' ',' | sed "s/,$$//g"` \
+	./Execute --input `ls samples/HHBBTauTauV22/*root | head -n 40 | tr '\n' ',' | sed "s/,$$//g"` \
 		--output HHBBTauTauLDR_V22.root --StoredGen true --config $(Config) --LDROnly true
 
 RunDYLL: Execute
-	./Execute --input `ls samples/DYLLV22/* | head -n 99999 | tr '\n' ',' | sed "s/,$$//g"` \
+	./Execute --input `ls samples/DYLLV22/*root | head -n 99999 | tr '\n' ',' | sed "s/,$$//g"` \
 		--output /tmp/$(USER)/DYLL_V22.root --StoredGen true --config $(Config)
 
 RunDYLLPartial: Execute
-	./Execute --input `ls samples/DYLLV22/* | head -n 40 | tr '\n' ',' | sed "s/,$$//g"` \
+	./Execute --input `ls samples/DYLLV22/*root | head -n 40 | tr '\n' ',' | sed "s/,$$//g"` \
 		--output /tmp/$(USER)/DYLLPartial_V22.root --StoredGen true --config $(Config)
 
 RunHGG: Execute
-	./Execute --input `ls samples/HGGV22/* | head -n 99999 | tr '\n' ',' | sed "s/,$$//g"` \
+	./Execute --input `ls samples/HGGV22/*root | head -n 99999 | tr '\n' ',' | sed "s/,$$//g"` \
 		--output /tmp/$(USER)/HGG_V22.root --StoredGen true --config $(Config)
 
 RunTTbar: Execute
-	./Execute --input `ls samples/TTbarV22/* | head -n 99999 | tr '\n' ',' | sed "s/,$$//g"` \
+	./Execute --input `ls samples/TTbarV22/*root | head -n 99999 | tr '\n' ',' | sed "s/,$$//g"` \
 		--output /tmp/$(USER)/TTbar_V22.root --StoredGen true --config $(Config)
 
 RunHadronicTTbar: Execute
-	./Execute --input `ls samples/TTbarV22/* | head -n 99999 | tr '\n' ',' | sed "s/,$$//g"` \
+	./Execute --input `ls samples/TTbarV22/*root | head -n 99999 | tr '\n' ',' | sed "s/,$$//g"` \
 		--output /tmp/$(USER)/HadronicTTbar_V22.root --StoredGen true --config $(Config) --RejectLeptonicW true
 
 RunVBFHTauTau: Execute
-	./Execute --input `ls samples/VBFHTauTauV22/* | head -n 99999 | tr '\n' ',' | sed "s/,$$//g"` \
+	./Execute --input `ls samples/VBFHTauTauV22/*root | head -n 99999 | tr '\n' ',' | sed "s/,$$//g"` \
 		--output /tmp/$(USER)/VBFHTauTau_V22.root --StoredGen true --config $(Config)
 
 RunHHBBTauTau: Execute
-	./Execute --input `ls samples/HHBBTauTauV22/* | head -n 99999 | tr '\n' ',' | sed "s/,$$//g"` \
+	./Execute --input `ls samples/HHBBTauTauV22/*root | head -n 99999 | tr '\n' ',' | sed "s/,$$//g"` \
 		--output /tmp/$(USER)/HHBBTauTau_V22.root --StoredGen true --config $(Config)
 
 
