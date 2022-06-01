@@ -19,6 +19,7 @@ default: Prepare Execute
 Prepare:
 	rm -f Outputs
 	ln -sf /eos/user/c/chenyi/BatchOutput/PhysicsWorkspace/L1TriggerUpgrade2018/TriggerTurnOn/21732_BasicTurnOnV10/// Outputs
+	mkdir -p Plots/
 
 Clean:
 	rm -f Execute
