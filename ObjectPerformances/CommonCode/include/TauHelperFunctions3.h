@@ -1,6 +1,6 @@
 //----------------------------------------------------------------------------
-#ifndef TauHelperFunctions_15763_AJSDKGIRIKANSVCGKISNCGIKNHKZSG
-#define TauHelperFunctions_15763_AJSDKGIRIKANSVCGKISNCGIKNHKZSG
+#ifndef TauHelperFunctions_H
+#define TauHelperFunctions_H
 //----------------------------------------------------------------------------
 // FourVector class - with a lot of extra setters and getter
 // Author: Yi Chen (original version on 6624)
@@ -9,55 +9,14 @@
 #include <cmath>
 #include <ostream>
 //----------------------------------------------------------------------------
-// #include "DrawRandom2.h"
-// #include "GenparticleTree.h"
-//----------------------------------------------------------------------------
-// Categories:
-//    -1. not final tau (goes into tau gamma)
-//    1. mu nu nu
-//    2. e nu nu
-//    3. nu pi-
-//    4. nu pi0 pi-
-//    5. nu pi0 pi0 pi-
-//    6. nu pi+ pi- pi-
-//    7. nu pi+ pi- pi- pi0
-//    8. Otherwise
-//----------------------------------------------------------------------------
-#define PI 3.14159265358979323846264338327950288479716939937510
-//----------------------------------------------------------------------------
 class FourVector;
 std::ostream &operator <<(std::ostream &out, FourVector P);
 FourVector operator *(double Scale, FourVector P);
 double GetAngle(FourVector P1, FourVector P2);
 double GetDR(FourVector P1, FourVector P2);
 double GetDPhi(FourVector P1, FourVector P2);
-double EPS(FourVector A, FourVector B, FourVector C, FourVector D);
-double GetMT(FourVector P1, FourVector P2);
-double GetMinRadius(FourVector P1, FourVector P2, FourVector P3);   // in eta-phi space
-double GetMinRadius(double X1, double Y1, double X2, double Y2, double X3, double Y3);
-double GetMR(FourVector P1, FourVector P2);
-double GetMRStar(FourVector P1, FourVector P2);
-double Get2011MR(FourVector P1, FourVector P2);
-double GetISRRemovedMR(FourVector P1, FourVector P2, FourVector POther, double ME3Assumption = 0);
-double GetISRRemoved2011MR(FourVector P1, FourVector P2, FourVector POther, double ME3Assumption = 0);
-double GetISR2011MR(FourVector P1, FourVector P2, FourVector ME, int Assumption = 0);
-double GetMRT(FourVector P1, FourVector P2, FourVector ME);
-double GetR(FourVector P1, FourVector P2, FourVector ME);
-double GetRStar(FourVector P1, FourVector P2, FourVector ME);
-double Get2011R(FourVector P1, FourVector P2, FourVector ME);
-double GetISRRemovedR(FourVector P1, FourVector P2, FourVector POther, double ME3Assumption = 0);
-double GetISRRemoved2011R(FourVector P1, FourVector P2, FourVector POther, double ME3Assumption = 0);
-double GetISR2011R(FourVector P1, FourVector P2, FourVector ME, int Assumption = 0, char AdditionalVariant = 'g');
-double GetGammaRStar(FourVector P1, FourVector P2);
 double BetaToGamma(double Beta);
 double GammaToBeta(double Gamma);
-std::vector<FourVector> SplitIntoGroups(std::vector<FourVector> &Input, bool ZeroMass = true);
-double GetDifference8(FourVector &P1, FourVector &P2, FourVector &ME, double BetaX);
-double GetDifference9(FourVector &P1, FourVector &P2, FourVector &ME, double BetaZ);
-double FindMR11MinimumPz(FourVector J1, FourVector J2, FourVector ME, FourVector ISR);
-double EstimateMass11(FourVector J1, FourVector J2, FourVector ME, FourVector ISR, bool Reversal = false);
-double EstimateTransverseMass11(FourVector J1, FourVector J2, FourVector ME, FourVector ISR, char Variant = 'g', bool Reversal = false);
-// int FindCategory(GenParticleTree &Tree, int index);
 //----------------------------------------------------------------------------
 class FourVector
 {
