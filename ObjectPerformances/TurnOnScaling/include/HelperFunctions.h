@@ -1,3 +1,11 @@
+// Contains all the fittings and string-ing for turn-ons
+//
+// Main functions:
+//    FitTurnOn(...).  Does fitting and returns the location where things crosses some target percentage
+//    SmoothTurnOn(...).  Uses a tensioned string model to find that location
+//
+// Author: Yi Chen (chen.yi.first@gmail.com)
+
 #include "TF1.h"
 #include "TFile.h"
 #include "TH1D.h"
