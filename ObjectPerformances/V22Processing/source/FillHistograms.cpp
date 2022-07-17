@@ -1,3 +1,11 @@
+// This is the actual executable to fill histograms
+//
+// It first reads the config files, then for each valid line in the config, create the histograms
+// 
+// For each event it goes through all the lines in the config and fill the corresponding histograms
+//
+// Author: Yi Chen (chen.yi.first@gmail.com)
+
 #include <iostream>
 #include <fstream>
 #include <sstream>

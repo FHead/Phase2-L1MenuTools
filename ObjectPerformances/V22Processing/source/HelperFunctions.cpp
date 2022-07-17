@@ -1,5 +1,10 @@
 #include "HelperFunctions.h"
 
+// Here we actually implement the helper functions!
+//
+// Yi Chen (chen.yi.first@gmail.com)
+
+
 int BestIndexInRange(vector<FourVector> &List, double AbsEta, double PTMin)
 {
    return BestIndexInRange(List, -1, AbsEta, PTMin);

@@ -1,5 +1,11 @@
 #include "Messenger.h"
 
+// This is where the interfacing is happening.  See below at
+//    bool L1PhaseIITreeV22Messenger::GetEntry(int Entry)
+// for more concrete example of what is happening behind the hood
+//
+// Author: Yi Chen (chen.yi.first@gmail.com)
+
 L1NTupleMessenger::L1NTupleMessenger(TFile &File, string TreeName)
 {
    Tree = (TTree *)File.Get(TreeName.c_str());

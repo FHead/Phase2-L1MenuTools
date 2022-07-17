@@ -1,6 +1,11 @@
 #ifndef HISTOGRAMS_H_21232
 #define HISTOGRAMS_H_21232
 
+// Defines all the histograms to be generated and filled per configuration
+// If we need other types of histograms we add them here
+//
+// Author: Yi Chen (chen.yi.first@gmail.com)
+
 #include <iostream>
 #include <vector>
 using namespace std;

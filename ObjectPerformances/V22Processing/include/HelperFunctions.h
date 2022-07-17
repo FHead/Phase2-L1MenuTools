@@ -1,3 +1,7 @@
+// This file collects a bunch of helper functions useful for the histogram filling
+//
+// Author: Yi Chen (chen.yi.first@gmail.com)
+
 #include <iostream>
 #include <vector>
 using namespace std;
@@ -12,7 +16,6 @@ using namespace std;
 #include "FourVector.h"
 
 #include "Messenger.h"
-
 #include "Histograms.h"
 
 #define QUAL_None -1

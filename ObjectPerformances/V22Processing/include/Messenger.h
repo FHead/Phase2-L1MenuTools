@@ -1,6 +1,16 @@
 #ifndef MESSENGER_V22_24434
 #define MESSENGER_V22_24434
 
+// This is the place where the interfacing with the L1 menu-tuple is happening
+//
+// Due to the way the ntuple is filled, it is dangerous to get the branches directly (due to root insanity)
+// We need to get the intermediate object "L1AnalysisPhaseIIStep1DataFormat" through the correct header
+//
+// The Messenger class gets the event content and fill them into the various vectors
+// where we can process further later on.  See Messenger.cpp for the filling part!
+//
+// Author: Yi Chen (chen.yi.first@gmail.com)
+
 #include <iostream>
 #include <vector>
 using namespace std;

@@ -1,5 +1,9 @@
 #include "Histograms.h"
 
+// Here we make all the histograms!  Each Histograms object correspond to one configuration line
+//
+// Author: Yi Chen (chen.yi.first@gmail.com)
+
 Histograms::Histograms(int ptbin, double ptmin, double ptmax,
    int Etabin, double Etamin, double Etamax,
    int isobin, double isomin, double isomax,
