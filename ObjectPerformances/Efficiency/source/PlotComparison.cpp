@@ -1,3 +1,18 @@
+// This is a general plotter!
+//
+// One can specify many things from the command line, including
+// - which curves to plot
+// - cumulative, ratio or plain histogram
+// - axis ranges, log or not
+// - legend size/location
+// - colors
+// - indefinite number of texts
+// etc.
+//
+// With this executable one can regenerate all the efficiency/turn-on/isolation/DR/... plots from Yi
+//
+// Author: Yi Chen (chen.yi.first@gmail.com)
+
 #include <iostream>
 #include <sstream>
 #include <vector>
