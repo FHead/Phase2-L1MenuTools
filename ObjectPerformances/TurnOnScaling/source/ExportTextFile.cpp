@@ -1,3 +1,10 @@
+// This file does the exporting to text file for rate codes
+//
+// It reads from DH files and format it in a way compatible with what the rate code needs
+// Not steerable from command line for now
+//
+// Author: Yi Chen (chen.yi.first@gmail.com)
+
 #include <iostream>
 #include <vector>
 #include <fstream>

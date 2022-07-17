@@ -1,3 +1,10 @@
+// This code makes the scaling plots!
+// 
+// Nothing too fancy, it reads in what to plot from command line and plot it
+// And save to a pdf
+//
+// Author: Yi Chen (chen.yi.first@gmail.com)
+
 #include <vector>
 #include <iostream>
 using namespace std;
