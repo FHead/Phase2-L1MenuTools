@@ -6,7 +6,7 @@
 #include <cmath>
 #include <ostream>
 //----------------------------------------------------------------------------
-#include "TauHelperFunctions3.h"
+#include "FourVector.h"
 //----------------------------------------------------------------------------
 FourVector::FourVector()
 {
