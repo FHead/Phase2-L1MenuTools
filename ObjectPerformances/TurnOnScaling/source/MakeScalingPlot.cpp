@@ -1,3 +1,13 @@
+// This file does the actual fitting / finding 95%
+//
+// From the command line there are a lot of Do*** switches to control which objects to run over
+// But the heavy lifting is the ProcessFile(...) function
+// It calls the correct function in the HelperFunctions.h to do the fitting
+//
+// The result is stored in a DH file for further processing
+//
+// Author: Yi Chen (chen.yi.first@gmail.com)
+
 #include <iostream>
 #include <vector>
 using namespace std;
