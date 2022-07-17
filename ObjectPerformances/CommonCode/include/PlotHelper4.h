@@ -6,9 +6,6 @@
 // The main idea is to write a plot both to a pdf and to a TFile at the same time,
 //    so that we can check quickly using pdf and come back to TFile later if needed
 //    the helper functions here will be mostly on *.pdf files
-// Added feature compared to 6152: being able to insert a table of contents (and it's clickable!)
-//    automatic home button
-//    automatic page number
 // Developer: Yi Chen, (1) 5653
 
 #include <iostream>
