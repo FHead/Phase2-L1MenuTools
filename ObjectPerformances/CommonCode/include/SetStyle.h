@@ -1,5 +1,12 @@
-#ifndef SetStyle_h_ikdofqwjito3jgthyqiwko3jhigtyq2jghufolqjgthy
-#define SetStyle_h_ikdofqwjito3jgthyqiwko3jhigtyq2jghufolqjgthy
+#ifndef SetStyle_h
+#define SetStyle_h
+
+// Some basic style setting collected by Yi over the years
+// One can call the Set***Style() function to switch around
+// Another useful thing is the GetPrimaryColors() function that
+//    gives the standard colors used in the turn ons
+//
+// Author: Yi Chen (chen.yi.first@gmail.com)
 
 #include <cstdlib>
 #include <vector>
