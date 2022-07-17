@@ -1,19 +1,26 @@
 //---------------------------------------------------------------------------
-#ifndef DATACONTAINER_H_6427_FHEAD_AJGKFVNGERINHGANGKFKAKNARGN
-#define DATACONTAINER_H_6427_FHEAD_AJGKFVNGERINHGANGKFKAKNARGN
+#ifndef DATACONTAINER_H
+#define DATACONTAINER_H
+//---------------------------------------------------------------------------
+// This is part of the custom helper file that allows better transfer
+// of numbers and strings across programs.  It's kind of like a super
+// light-weight database that depends only on C++ standard library.
+// See DataHelper.h for more explanation.
+//
+// Author:
+//    Yi Chen (chen.yi.first@gmail.com)
 //---------------------------------------------------------------------------
 #include <string>
 #include <istream>
 #include <ostream>
 #include <sstream>
 #include <algorithm>
-using namespace std;
 //---------------------------------------------------------------------------
 class DataContainer;
 union DataMessenger;
 //---------------------------------------------------------------------------
-ostream &operator <<(ostream &out, DataContainer data);
-istream &operator >>(istream &in, DataContainer &data);
+std::ostream &operator <<(std::ostream &out, DataContainer data);
+std::istream &operator >>(std::istream &in, DataContainer &data);
 //---------------------------------------------------------------------------
 void IntegerToChar4(int Number, char ChNumber[4]);
 long long Char4ToInteger(char ChNumber[4]);
@@ -25,13 +32,13 @@ class DataContainer
 public:
    enum {DataTypeNone, DataTypeString, DataTypeDouble, DataTypeInteger};
 private:
-   string StringValue;
+   std::string StringValue;
    double DoubleValue;
    long long IntegerValue;
    int Type;
 public:
    DataContainer();
-   DataContainer(string value);
+   DataContainer(std::string value);
    DataContainer(double value);
    DataContainer(long long value);
    // DataContainer(DataContainer &other);
@@ -39,36 +46,36 @@ public:
    ~DataContainer();
    long long GetInteger();
    double GetDouble();
-   string GetString();
-   string GetRepresentation();
-   string GetRawRepresentation();
+   std::string GetString();
+   std::string GetRepresentation();
+   std::string GetRawRepresentation();
    int GetType();
-   DataContainer &operator =(string value);
+   DataContainer &operator =(std::string value);
    DataContainer &operator =(double value);
    DataContainer &operator =(int value);
    DataContainer &operator =(long long value);
    // DataContainer &operator =(DataContainer &other);
-   bool operator <(string value) const { return *this < DataContainer(value); }
+   bool operator <(std::string value) const { return *this < DataContainer(value); }
    bool operator <(double value) const { return *this < DataContainer(value); }
    bool operator <(long long value) const { return *this < DataContainer(value); }
    bool operator <(const DataContainer &other) const;
-   bool operator <=(string value) const { return *this <= DataContainer(value); }
+   bool operator <=(std::string value) const { return *this <= DataContainer(value); }
    bool operator <=(double value) const { return *this <= DataContainer(value); }
    bool operator <=(long long value) const { return *this <= DataContainer(value); }
    bool operator <=(const DataContainer &other) const { return *this < other || *this == other; }
-   bool operator >(string value) const { return *this > DataContainer(value); }
+   bool operator >(std::string value) const { return *this > DataContainer(value); }
    bool operator >(double value) const { return *this > DataContainer(value); }
    bool operator >(long long value) const { return *this > DataContainer(value); }
    bool operator >(const DataContainer &other) const { return *this >= other && *this != other; }
-   bool operator >=(string value) const { return *this >= DataContainer(value); }
+   bool operator >=(std::string value) const { return *this >= DataContainer(value); }
    bool operator >=(double value) const { return *this >= DataContainer(value); }
    bool operator >=(long long value) const { return *this >= DataContainer(value); }
    bool operator >=(const DataContainer &other) const { return !(*this < other); }
-   bool operator ==(string value) const { return *this == DataContainer(value); }
+   bool operator ==(std::string value) const { return *this == DataContainer(value); }
    bool operator ==(double value) const { return *this == DataContainer(value); }
    bool operator ==(long long value) const { return *this == DataContainer(value); }
    bool operator ==(const DataContainer &other) const;
-   bool operator !=(string value) const { return *this != DataContainer(value); }
+   bool operator !=(std::string value) const { return *this != DataContainer(value); }
    bool operator !=(double value) const { return *this != DataContainer(value); }
    bool operator !=(long long value) const { return *this != DataContainer(value); }
    bool operator !=(const DataContainer &other) const { return !(*this == other); }
@@ -77,8 +84,8 @@ public:
    DataContainer operator *(const DataContainer &other);   // none: nothing, string * string: concatenation, string * number: repetition, numbers: multiplication
    DataContainer operator /(const DataContainer &other);   // none: nothing, string: nothing, numbers: division
    DataContainer operator -();   // none: nothing, string: reverse, numbers: negation
-   void SaveToStream(ostream &out);
-   void LoadFromStream(istream &in);
+   void SaveToStream(std::ostream &out);
+   void LoadFromStream(std::istream &in);
 };
 //---------------------------------------------------------------------------
 union DataMessenger
@@ -97,7 +104,7 @@ DataContainer::DataContainer()
    Type = DataTypeNone;
 }
 //---------------------------------------------------------------------------
-DataContainer::DataContainer(string value)
+DataContainer::DataContainer(std::string value)
 {
    StringValue = value;
    IntegerValue = 0;
@@ -155,12 +162,12 @@ double DataContainer::GetDouble()
    return DoubleValue;
 }
 //---------------------------------------------------------------------------
-string DataContainer::GetString()
+std::string DataContainer::GetString()
 {
    return StringValue;
 }
 //---------------------------------------------------------------------------
-string DataContainer::GetRepresentation()
+std::string DataContainer::GetRepresentation()
 {
    if(Type == DataTypeNone)
       return "NONE";
@@ -168,13 +175,13 @@ string DataContainer::GetRepresentation()
       return "\"" + StringValue + "\"";
    else if(Type == DataTypeDouble)
    {
-      stringstream str;
+      std::stringstream str;
       str << DoubleValue;
       return str.str();
    }
    else if(Type == DataTypeInteger)
    {
-      stringstream str;
+      std::stringstream str;
       str << IntegerValue;
       return str.str();
    }
@@ -182,7 +189,7 @@ string DataContainer::GetRepresentation()
    return "";
 }
 //---------------------------------------------------------------------------
-string DataContainer::GetRawRepresentation()
+std::string DataContainer::GetRawRepresentation()
 {
    if(Type == DataTypeNone)
       return "NONE";
@@ -190,13 +197,13 @@ string DataContainer::GetRawRepresentation()
       return StringValue;
    else if(Type == DataTypeDouble)
    {
-      stringstream str;
+      std::stringstream str;
       str << DoubleValue;
       return str.str();
    }
    else if(Type == DataTypeInteger)
    {
-      stringstream str;
+      std::stringstream str;
       str << IntegerValue;
       return str.str();
    }
@@ -209,7 +216,7 @@ int DataContainer::GetType()
    return Type;
 }
 //---------------------------------------------------------------------------
-DataContainer &DataContainer::operator =(string value)
+DataContainer &DataContainer::operator =(std::string value)
 {
    StringValue = value;
    Type = DataTypeString;
@@ -349,7 +356,7 @@ DataContainer DataContainer::operator +(const DataContainer &other)
          result.StringValue = result.StringValue + other.StringValue;
       else if(other.Type == DataTypeInteger || other.Type == DataTypeDouble)
       {
-         stringstream str;
+         std::stringstream str;
 
          if(other.Type == DataTypeInteger)
             str << other.IntegerValue;
@@ -472,7 +479,7 @@ DataContainer DataContainer::operator *(const DataContainer &other)
             Repetition = -Repetition;
          }
 
-         string Temp = result.StringValue;
+         std::string Temp = result.StringValue;
          for(int i = 1; i < Repetition; i++)
             result.StringValue = result.StringValue + Temp;
 
@@ -589,7 +596,7 @@ DataContainer DataContainer::operator -()
    return Empty;
 }
 //---------------------------------------------------------------------------
-void DataContainer::SaveToStream(ostream &out)
+void DataContainer::SaveToStream(std::ostream &out)
 {
    char TypeChar = (char)Type;
 
@@ -622,7 +629,7 @@ void DataContainer::SaveToStream(ostream &out)
    }
 }
 //---------------------------------------------------------------------------
-void DataContainer::LoadFromStream(istream &in)
+void DataContainer::LoadFromStream(std::istream &in)
 {
    char TypeChar = '\0';
 
@@ -663,13 +670,13 @@ void DataContainer::LoadFromStream(istream &in)
    }
 }
 //---------------------------------------------------------------------------
-ostream &operator <<(ostream &out, DataContainer data)
+std::ostream &operator <<(std::ostream &out, DataContainer data)
 {
    out << data.GetRepresentation();
    return out;
 }
 //---------------------------------------------------------------------------
-istream &operator >>(istream &in, DataContainer &data)
+std::istream &operator >>(std::istream &in, DataContainer &data)
 {
    data.LoadFromStream(in);
    return in;

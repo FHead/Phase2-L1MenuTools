@@ -1,3 +1,24 @@
+#ifndef COMMANDLINE_H
+#define COMMANDLINE_H
+
+///////////////////////////////////////////////////////////////////////////////////
+// Command line utility                                                          //
+//                                                                               //
+// This header file implements the basic command line argument parsing without   //
+// dependencies on external bulky libraries                                      //
+//                                                                               //
+// Arguments can be specified using either single dash "-" or double             //
+// dashes "--".  If double dash, treat the very next item as the value.          //
+// Example:                                                                      //
+// > -DoJet true -DoEG -DoHT true                                                //
+// will parse as DoJet = true, DoEG not specified, DoHT true                     //
+// > --DoJet true --DoEG --DoHT true                                             //
+// will parse as DoJet = true, DoEG = "--DoHT", and the final "true" is skipped  //
+//                                                                               //
+// Original author:                                                              //
+//    Yi Chen (chen.yi.first@gmail.com)                                          //
+///////////////////////////////////////////////////////////////////////////////////
+
 #include <map>
 #include <vector>
 #include <iostream>
@@ -520,3 +541,4 @@ std::vector<bool> CommandLine::ParseBool(std::string Input, char Delimiter)
    return Result;
 }
 
+#endif

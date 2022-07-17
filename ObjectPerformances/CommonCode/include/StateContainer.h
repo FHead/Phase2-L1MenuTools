@@ -1,24 +1,31 @@
 //---------------------------------------------------------------------------
-#ifndef STATECONTAINER_H_6427_FHEAD_JFRNHGKIARFNHSGKNLAGRKIR
-#define STATECONTAINER_H_6427_FHEAD_JFRNHGKIARFNHSGKNLAGRKIR
+#ifndef STATECONTAINER_H
+#define STATECONTAINER_H
+//---------------------------------------------------------------------------
+// This is part of the custom helper file that allows better transfer
+// of numbers and strings across programs.  It's kind of like a super
+// light-weight database that depends only on C++ standard library.
+// See DataHelper.h for more explanation.
+//
+// Author:
+//    Yi Chen (chen.yi.first@gmail.com)
 //---------------------------------------------------------------------------
 #include <string>
 #include <vector>
 #include <map>
-using namespace std;
 //---------------------------------------------------------------------------
 #include "DataContainer.h"
 //---------------------------------------------------------------------------
 class StateContainer;
 //---------------------------------------------------------------------------
-ostream &operator <<(ostream &out, StateContainer &data);
-istream &operator >>(istream &in, StateContainer &data);
+std::ostream &operator <<(std::ostream &out, StateContainer &data);
+std::istream &operator >>(std::istream &in, StateContainer &data);
 //---------------------------------------------------------------------------
 class StateContainer
 {
    friend class DataHelper;
 private:
-   map<string, DataContainer> Data;
+   std::map<std::string, DataContainer> Data;
 public:
    StateContainer();
    StateContainer(StateContainer &other);
@@ -28,18 +35,18 @@ private:
    void Initialize();
    void CleanUp();
 public:
-   vector<string> GetListOfKeys();
-   DataContainer &operator [](string Key);   // get single object
-   void Insert(string Key, DataContainer NewData);
-   bool Exist(string Key);
-   void Touch(string Key);
-   void Delete(string Key);
-   string GetRepresentation(string Key);   // get representation of single value
-   string GetRepresentation();   // get representation of whole object
-   string GetRawRepresentation(string Key);   // get representation of single value
-   string GetRawRepresentation();   // get representation of whole object
-   void SaveToStream(ostream &out);
-   void LoadFromStream(istream &in);
+   std::vector<std::string> GetListOfKeys();
+   DataContainer &operator [](std::string Key);   // get single object
+   void Insert(std::string Key, DataContainer NewData);
+   bool Exist(std::string Key);
+   void Touch(std::string Key);
+   void Delete(std::string Key);
+   std::string GetRepresentation(std::string Key);   // get representation of single value
+   std::string GetRepresentation();   // get representation of whole object
+   std::string GetRawRepresentation(std::string Key);   // get representation of single value
+   std::string GetRawRepresentation();   // get representation of whole object
+   void SaveToStream(std::ostream &out);
+   void LoadFromStream(std::istream &in);
    StateContainer &operator =(const StateContainer &other);
 };
 //---------------------------------------------------------------------------
@@ -70,44 +77,44 @@ void StateContainer::CleanUp()
    Data.clear();
 }
 //---------------------------------------------------------------------------
-vector<string> StateContainer::GetListOfKeys()
+std::vector<std::string> StateContainer::GetListOfKeys()
 {
-   vector<string> Keys;
-   for(map<string, DataContainer>::iterator iter = Data.begin(); iter != Data.end(); iter++)
+   std::vector<std::string> Keys;
+   for(std::map<std::string, DataContainer>::iterator iter = Data.begin(); iter != Data.end(); iter++)
       Keys.push_back(iter->first);
    
    return Keys;
 }
 //---------------------------------------------------------------------------
-DataContainer &StateContainer::operator [](string Key)
+DataContainer &StateContainer::operator [](std::string Key)
 {
    Touch(Key);   
    return Data[Key];
 }
 //---------------------------------------------------------------------------
-void StateContainer::Insert(string Key, DataContainer NewData)
+void StateContainer::Insert(std::string Key, DataContainer NewData)
 {
    Touch(Key);
    Data[Key] = NewData;
 }
 //---------------------------------------------------------------------------
-bool StateContainer::Exist(string Key)
+bool StateContainer::Exist(std::string Key)
 {
    if(Data.find(Key) == Data.end())
       return false;
    return true;
 }
 //---------------------------------------------------------------------------
-void StateContainer::Touch(string Key)
+void StateContainer::Touch(std::string Key)
 {
    if(Data.find(Key) != Data.end())
       return;
       
    DataContainer NewData;
-   Data.insert(pair<string, DataContainer>(Key, NewData));
+   Data.insert(std::pair<std::string, DataContainer>(Key, NewData));
 }
 //---------------------------------------------------------------------------
-void StateContainer::Delete(string Key)
+void StateContainer::Delete(std::string Key)
 {
    if(Data.find(Key) == Data.end())
       return;
@@ -115,7 +122,7 @@ void StateContainer::Delete(string Key)
    Data.erase(Data.find(Key));
 }
 //---------------------------------------------------------------------------
-string StateContainer::GetRepresentation(string Key)
+std::string StateContainer::GetRepresentation(std::string Key)
 {
    if(Data.find(Key) == Data.end())
       return "DATANOTFOUND";
@@ -123,13 +130,13 @@ string StateContainer::GetRepresentation(string Key)
    return Data[Key].GetRepresentation();
 }
 //---------------------------------------------------------------------------
-string StateContainer::GetRepresentation()
+std::string StateContainer::GetRepresentation()
 {
    bool FirstEntry = true;
 
-   string Representation = "{";
+   std::string Representation = "{";
    
-   for(map<string, DataContainer>::iterator iter = Data.begin(); iter != Data.end(); iter++)
+   for(std::map<std::string, DataContainer>::iterator iter = Data.begin(); iter != Data.end(); iter++)
    {
       if(FirstEntry == true)
          FirstEntry = false;
@@ -144,7 +151,7 @@ string StateContainer::GetRepresentation()
    return Representation;
 }
 //---------------------------------------------------------------------------
-string StateContainer::GetRawRepresentation(string Key)
+std::string StateContainer::GetRawRepresentation(std::string Key)
 {
    if(Data.find(Key) == Data.end())
       return "DATANOTFOUND";
@@ -152,13 +159,13 @@ string StateContainer::GetRawRepresentation(string Key)
    return Data[Key].GetRawRepresentation();
 }
 //---------------------------------------------------------------------------
-string StateContainer::GetRawRepresentation()
+std::string StateContainer::GetRawRepresentation()
 {
    bool FirstEntry = true;
 
-   string Representation = "{";
+   std::string Representation = "{";
    
-   for(map<string, DataContainer>::iterator iter = Data.begin(); iter != Data.end(); iter++)
+   for(std::map<std::string, DataContainer>::iterator iter = Data.begin(); iter != Data.end(); iter++)
    {
       if(FirstEntry == true)
          FirstEntry = false;
@@ -173,14 +180,14 @@ string StateContainer::GetRawRepresentation()
    return Representation;
 }
 //---------------------------------------------------------------------------
-void StateContainer::SaveToStream(ostream &out)
+void StateContainer::SaveToStream(std::ostream &out)
 {
    char EntryCount[4];
    IntegerToChar4(Data.size(), EntryCount);
    
    out.write(EntryCount, 4);
    
-   for(map<string, DataContainer>::iterator iter = Data.begin(); iter != Data.end(); iter++)
+   for(std::map<std::string, DataContainer>::iterator iter = Data.begin(); iter != Data.end(); iter++)
    {
       char KeySize[4];
       IntegerToChar4(iter->first.size(), KeySize);
@@ -192,7 +199,7 @@ void StateContainer::SaveToStream(ostream &out)
    }
 }
 //---------------------------------------------------------------------------
-void StateContainer::LoadFromStream(istream &in)
+void StateContainer::LoadFromStream(std::istream &in)
 {
    CleanUp();
    
@@ -206,7 +213,7 @@ void StateContainer::LoadFromStream(istream &in)
       in.read(KeySizeChar, 4);
       int KeySize = Char4ToInteger(KeySizeChar);
 
-      string Key = "";
+      std::string Key = "";
       
       char *ch = new char[KeySize+1];
       in.read(ch, KeySize);
@@ -217,7 +224,7 @@ void StateContainer::LoadFromStream(istream &in)
       DataContainer NewData;
       NewData.LoadFromStream(in);
       
-      Data.insert(pair<string, DataContainer>(Key, NewData));
+      Data.insert(std::pair<std::string, DataContainer>(Key, NewData));
    }
 }
 //---------------------------------------------------------------------------
@@ -228,13 +235,13 @@ StateContainer &StateContainer::operator =(const StateContainer &other)
    return *this;
 }
 //---------------------------------------------------------------------------
-ostream &operator <<(ostream &out, StateContainer &data)
+std::ostream &operator <<(std::ostream &out, StateContainer &data)
 {
    out << data.GetRepresentation();
    return out;
 }
 //---------------------------------------------------------------------------
-istream &operator >>(istream &in, StateContainer &data)
+std::istream &operator >>(std::istream &in, StateContainer &data)
 {
    data.LoadFromStream(in);
    return in;

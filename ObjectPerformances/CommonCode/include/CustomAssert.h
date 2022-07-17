@@ -4,6 +4,9 @@
 // Taken from Eugene Magdalits
 // https://stackoverflow.com/questions/3692954/add-custom-messages-in-assert
 
+// This implements a handy Assert(...) function that prints some useful text
+// Usage: Assert([Things that should be true], "otherwise print this")
+
 #include <iostream>
 
 #define Assert(Expr, Msg) __M_Assert(#Expr, Expr, __FILE__, __LINE__, Msg)

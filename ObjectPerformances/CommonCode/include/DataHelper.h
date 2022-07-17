@@ -1,6 +1,26 @@
 //---------------------------------------------------------------------------
-#ifndef DATAHELPER_H_6427_FHEAD_JANHIWFWKIGHWKIDAGFBAFKER
-#define DATAHELPER_H_6427_FHEAD_JANHIWFWKIGHWKIDAGFBAFKER
+#ifndef DATAHELPER_H
+#define DATAHELPER_H
+//---------------------------------------------------------------------------
+// This is part of the custom helper file that allows better transfer
+// of numbers and strings across programs.  It's kind of like a super
+// light-weight database that depends only on C++ standard library.
+//
+// It implements a two-stage structure: first there are a list of states, and
+// within each state there are list of key-value pairs.
+//
+// The value can be string, floating point, or integer, depending on what you
+// assign it with.
+//
+// Usage:
+//    DataHelper DHFile("Data.dh");
+//    DHFile["State"]["Key"] = "Value";
+//    DHFile["State"]["NJet"] = 100;
+//    DHFile["State"]["JetPTSlope"] = -4.5;
+//    DHFile.SaveToFile();   // can also specify a string to save to new file
+//
+// Author:
+//    Yi Chen (chen.yi.first@gmail.com)
 //---------------------------------------------------------------------------
 #include <string>
 #include <cstring>
@@ -8,48 +28,47 @@
 #include <ostream>
 #include <fstream>
 #include <map>
-using namespace std;
 //---------------------------------------------------------------------------
 #include "StateContainer.h"
 //---------------------------------------------------------------------------
 class DataHelper;
 //---------------------------------------------------------------------------
-ostream &operator <<(ostream &out, DataHelper &data);
-istream &operator >>(istream &in, DataHelper &data);
+std::ostream &operator <<(std::ostream &out, DataHelper &data);
+std::istream &operator >>(std::istream &in, DataHelper &data);
 //---------------------------------------------------------------------------
 class DataHelper
 {
 private:
-   map<string, StateContainer> States;
+   std::map<std::string, StateContainer> States;
    char ConstantHeader[32];
-   string CurrentFileName;
+   std::string CurrentFileName;
 public:
    DataHelper();
-   DataHelper(string FileName);
+   DataHelper(std::string FileName);
    ~DataHelper(); 
 private:
    void Initialize();
    void CleanUp();
 public:
-   StateContainer &operator [](string Key);
-   vector<string> GetListOfKeys();
-   bool Exist(string Key);
-   void Touch(string Key);
-   void Insert(string Key, StateContainer NewState);
-   void Erase(string Key);
-   string GetRepresentation();
-   string GetRepresentation(string Key);
-   string GetRepresentation(string Key, string Item);
-   string GetRawRepresentation();
-   string GetRawRepresentation(string Key);
-   string GetRawRepresentation(string Key, string Item);
+   StateContainer &operator [](std::string Key);
+   std::vector<std::string> GetListOfKeys();
+   bool Exist(std::string Key);
+   void Touch(std::string Key);
+   void Insert(std::string Key, StateContainer NewState);
+   void Erase(std::string Key);
+   std::string GetRepresentation();
+   std::string GetRepresentation(std::string Key);
+   std::string GetRepresentation(std::string Key, std::string Item);
+   std::string GetRawRepresentation();
+   std::string GetRawRepresentation(std::string Key);
+   std::string GetRawRepresentation(std::string Key, std::string Item);
    DataHelper &operator =(DataHelper &other);
-   void LoadFromFile(string FileName);
+   void LoadFromFile(std::string FileName);
    void LoadFromFile();
-   void SaveToFile(string FileName);
+   void SaveToFile(std::string FileName);
    void SaveToFile();
-   void LoadFromStream(istream &in);
-   void SaveToStream(ostream &out);
+   void LoadFromStream(std::istream &in);
+   void SaveToStream(std::ostream &out);
 };
 //---------------------------------------------------------------------------
 DataHelper::DataHelper()
@@ -57,7 +76,7 @@ DataHelper::DataHelper()
    Initialize();
 }
 //---------------------------------------------------------------------------
-DataHelper::DataHelper(string FileName)
+DataHelper::DataHelper(std::string FileName)
 {
    Initialize();
    LoadFromFile(FileName);
@@ -80,47 +99,47 @@ void DataHelper::CleanUp()
    States.clear();
 }
 //---------------------------------------------------------------------------
-StateContainer &DataHelper::operator [](string Key)
+StateContainer &DataHelper::operator [](std::string Key)
 {
    Touch(Key);
    
    return States[Key];
 }
 //---------------------------------------------------------------------------
-vector<string> DataHelper::GetListOfKeys()
+std::vector<std::string> DataHelper::GetListOfKeys()
 {
-   vector<string> Keys;
+   std::vector<std::string> Keys;
 
-   for(map<string, StateContainer>::iterator iter = States.begin(); iter != States.end(); iter++)
+   for(std::map<std::string, StateContainer>::iterator iter = States.begin(); iter != States.end(); iter++)
       Keys.push_back(iter->first);
       
    return Keys;
 }
 //---------------------------------------------------------------------------
-bool DataHelper::Exist(string Key)
+bool DataHelper::Exist(std::string Key)
 {
    if(States.find(Key) == States.end())
       return false;
    return true;
 }
 //---------------------------------------------------------------------------
-void DataHelper::Touch(string Key)
+void DataHelper::Touch(std::string Key)
 {
    if(States.find(Key) != States.end())
       return;
       
    StateContainer NewState;
-   States.insert(pair<string, StateContainer>(Key, NewState));
+   States.insert(std::pair<std::string, StateContainer>(Key, NewState));
 }
 //---------------------------------------------------------------------------
-void DataHelper::Insert(string Key, StateContainer NewState)
+void DataHelper::Insert(std::string Key, StateContainer NewState)
 {
    Touch(Key);
    
    States[Key] = NewState;
 }
 //---------------------------------------------------------------------------
-void DataHelper::Erase(string Key)
+void DataHelper::Erase(std::string Key)
 {
    if(States.find(Key) == States.end())
       return;
@@ -128,13 +147,13 @@ void DataHelper::Erase(string Key)
    States.erase(States.find(Key));
 }
 //---------------------------------------------------------------------------
-string DataHelper::GetRepresentation()
+std::string DataHelper::GetRepresentation()
 {
-   string Representation = "[";
+   std::string Representation = "[";
 
    bool FirstItem = true;
    
-   for(map<string, StateContainer>::iterator iter = States.begin(); iter != States.end(); iter++)
+   for(std::map<std::string, StateContainer>::iterator iter = States.begin(); iter != States.end(); iter++)
    {
       if(FirstItem == true)
          FirstItem = false;
@@ -149,7 +168,7 @@ string DataHelper::GetRepresentation()
    return Representation;
 }
 //---------------------------------------------------------------------------
-string DataHelper::GetRepresentation(string Key)
+std::string DataHelper::GetRepresentation(std::string Key)
 {
    if(States.find(Key) == States.end())
       return "STATENOTFOUND";
@@ -157,7 +176,7 @@ string DataHelper::GetRepresentation(string Key)
    return States[Key].GetRepresentation();
 }
 //---------------------------------------------------------------------------
-string DataHelper::GetRepresentation(string Key, string Item)
+std::string DataHelper::GetRepresentation(std::string Key, std::string Item)
 {
    if(States.find(Key) == States.end())
       return "STATENOTFOUND";
@@ -165,13 +184,13 @@ string DataHelper::GetRepresentation(string Key, string Item)
    return States[Key].GetRepresentation(Item);
 }
 //---------------------------------------------------------------------------
-string DataHelper::GetRawRepresentation()
+std::string DataHelper::GetRawRepresentation()
 {
-   string Representation = "[";
+   std::string Representation = "[";
 
    bool FirstItem = true;
    
-   for(map<string, StateContainer>::iterator iter = States.begin(); iter != States.end(); iter++)
+   for(std::map<std::string, StateContainer>::iterator iter = States.begin(); iter != States.end(); iter++)
    {
       if(FirstItem == true)
          FirstItem = false;
@@ -186,7 +205,7 @@ string DataHelper::GetRawRepresentation()
    return Representation;
 }
 //---------------------------------------------------------------------------
-string DataHelper::GetRawRepresentation(string Key)
+std::string DataHelper::GetRawRepresentation(std::string Key)
 {
    if(States.find(Key) == States.end())
       return "STATENOTFOUND";
@@ -194,7 +213,7 @@ string DataHelper::GetRawRepresentation(string Key)
    return States[Key].GetRawRepresentation();
 }
 //---------------------------------------------------------------------------
-string DataHelper::GetRawRepresentation(string Key, string Item)
+std::string DataHelper::GetRawRepresentation(std::string Key, std::string Item)
 {
    if(States.find(Key) == States.end())
       return "STATENOTFOUND";
@@ -209,7 +228,7 @@ DataHelper &DataHelper::operator =(DataHelper &other)
    return *this;
 }
 //---------------------------------------------------------------------------
-void DataHelper::LoadFromFile(string FileName)
+void DataHelper::LoadFromFile(std::string FileName)
 {
    CurrentFileName = FileName;
    LoadFromFile();
@@ -217,12 +236,12 @@ void DataHelper::LoadFromFile(string FileName)
 //---------------------------------------------------------------------------
 void DataHelper::LoadFromFile()
 {
-   ifstream in(CurrentFileName.c_str());
+   std::ifstream in(CurrentFileName.c_str());
    LoadFromStream(in);
    in.close();
 }
 //---------------------------------------------------------------------------
-void DataHelper::SaveToFile(string FileName)
+void DataHelper::SaveToFile(std::string FileName)
 {
    CurrentFileName = FileName;
    SaveToFile();
@@ -230,12 +249,12 @@ void DataHelper::SaveToFile(string FileName)
 //---------------------------------------------------------------------------
 void DataHelper::SaveToFile()
 {
-   ofstream out(CurrentFileName.c_str());
+   std::ofstream out(CurrentFileName.c_str());
    SaveToStream(out);
    out.close();
 }
 //---------------------------------------------------------------------------
-void DataHelper::LoadFromStream(istream &in)
+void DataHelper::LoadFromStream(std::istream &in)
 {
    char Header[33];
    in.read(Header, 32);
@@ -258,17 +277,17 @@ void DataHelper::LoadFromStream(istream &in)
       in.read(ch, KeySize);
       ch[KeySize] = '\0';
       
-      string Key = ch;
+      std::string Key = ch;
       delete[] ch;
       
       StateContainer NewState;
       NewState.LoadFromStream(in);
       
-      States.insert(pair<string, StateContainer>(Key, NewState));
+      States.insert(std::pair<std::string, StateContainer>(Key, NewState));
    }
 }
 //---------------------------------------------------------------------------
-void DataHelper::SaveToStream(ostream &out)
+void DataHelper::SaveToStream(std::ostream &out)
 {
    out.write(ConstantHeader, 32);
    
@@ -276,7 +295,7 @@ void DataHelper::SaveToStream(ostream &out)
    IntegerToChar4(States.size(), EntryCount);
    out.write(EntryCount, 4);
    
-   for(map<string, StateContainer>::iterator iter = States.begin(); iter != States.end(); iter++)
+   for(std::map<std::string, StateContainer>::iterator iter = States.begin(); iter != States.end(); iter++)
    {
       char KeySize[4];
       IntegerToChar4(iter->first.size(), KeySize);
@@ -288,13 +307,13 @@ void DataHelper::SaveToStream(ostream &out)
    }
 }
 //---------------------------------------------------------------------------
-ostream &operator <<(ostream &out, DataHelper &data)
+std::ostream &operator <<(std::ostream &out, DataHelper &data)
 {
    out << data.GetRepresentation();
    return out;
 }
 //---------------------------------------------------------------------------
-istream &operator >>(istream &in, DataHelper &data)
+std::istream &operator >>(std::istream &in, DataHelper &data)
 {
    data.LoadFromStream(in);
    return in;
