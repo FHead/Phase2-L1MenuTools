@@ -1,3 +1,6 @@
+#ifndef PROGRESSBAR_H
+#define PROGRESSBAR_H
+
 // Progress bar class
 // Author: Yi Chen
 
@@ -234,7 +237,7 @@ void ProgressBar::Print(double progress)
       *Out << "\033[1GCurrent progress: " << progress - Min << std::flush;
 }
 
-
+#endif
 
 
 
