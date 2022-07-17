@@ -6,6 +6,17 @@
 // The main idea is to write a plot both to a pdf and to a TFile at the same time,
 //    so that we can check quickly using pdf and come back to TFile later if needed
 //    the helper functions here will be mostly on *.pdf files
+//
+// Usage synopsis:
+//    PdfFileHelper PdfFile("ManyPlots.pdf");
+//
+//    PdfFile.AddTextPage("Title");   // adds a page that says "Title"
+//    PdfFile.AddTextPage({"A", "B", "C"});   // adds a page that have three lines
+//    PdfFile.AddPlot(Histogram, "hist");   // adds a page with Histogram->Draw("hist");
+//    PdfFile.AddCanvas(Canvas);   // adds a page with the canvas content
+//    PdfFile.AddTimeStampPage();   // adds a time stamp page
+//    PdfFile.Close();   // actually close the pdf file
+//
 // Developer: Yi Chen, (1) 5653
 
 #include <iostream>
@@ -13,7 +24,6 @@
 #include <string>
 #include <vector>
 #include <ctime>
-using namespace std;
 
 #include "TCanvas.h"
 #include "TLatex.h"
@@ -32,83 +42,83 @@ using namespace std;
 class PdfFileHelper
 {
 private:
-   string FileName;
-   string Option;
+   std::string FileName;
+   std::string Option;
    bool Status;   // false - file not opened; true - file good and ongoing
 private:
    bool AutomaticHomeButton;
    double HomeButtonX;
    double HomeButtonY;
    double HomeButtonSize;
-   string HomeButtonDestination;
+   std::string HomeButtonDestination;
    bool PrintPageNumber;
    int NextPageNumber;
 public:
    PdfFileHelper();
-   PdfFileHelper(string filename);
-   PdfFileHelper(string filename, string option);
+   PdfFileHelper(std::string filename);
+   PdfFileHelper(std::string filename, std::string option);
    ~PdfFileHelper();
-   void Open(string filename);
+   void Open(std::string filename);
    void Close();
-   string GetFileName();
-   void SetOption(string option);
-   string GetOption();
-   template <class PlotType> void AddPlot(PlotType *Histogram, string PlotOption = "",
+   std::string GetFileName();
+   void SetOption(std::string option);
+   std::string GetOption();
+   template <class PlotType> void AddPlot(PlotType *Histogram, std::string PlotOption = "",
       bool LogY = false, bool LogZ = false, bool Grid = false, bool LogX = false);
    template <class PlotType> void Add4PanelPlot(PlotType *Histogram1, PlotType *Histogram2,
-      PlotType *Histogram3, PlotType *Histogram4, string PlotOption = "",
+      PlotType *Histogram3, PlotType *Histogram4, std::string PlotOption = "",
       bool LogY = false, bool LogZ = false, bool Grid = false, bool LogX = false);
-   template <class PlotType> void AddPlot(PlotType &Histogram, string PlotOption = "",
+   template <class PlotType> void AddPlot(PlotType &Histogram, std::string PlotOption = "",
       bool LogY = false, bool LogZ = false, bool Grid = false, bool LogX = false);
    template <class PlotType> void Add4PanelPlot(PlotType &Histogram1, PlotType &Histogram2,
-      PlotType &Histogram3, PlotType &Histogram4, string PlotOption = "",
+      PlotType &Histogram3, PlotType &Histogram4, std::string PlotOption = "",
       bool LogY = false, bool LogZ = false, bool Grid = false, bool LogX = false);
-   template <class PlotType> void AddNormalizedPlot(PlotType *Histogram, string PlotOption = "",
+   template <class PlotType> void AddNormalizedPlot(PlotType *Histogram, std::string PlotOption = "",
       bool LogY = false, bool LogZ = false, bool Grid = false);
-   template <class PlotType> void AddNormalizedPlot(PlotType &Histogram, string PlotOption = "",
+   template <class PlotType> void AddNormalizedPlot(PlotType &Histogram, std::string PlotOption = "",
       bool LogY = false, bool LogZ = false, bool Grid = false);
-   template <class PlotType> void AddPlotWithText(PlotType *Histogram, string Text,
-      string PlotOption = "", double X = 0.1, double Y = 0.9, double TextSize = 0.03);
-   template <class PlotType> void AddPlotWithText(PlotType &Histogram, string Text,
-      string PlotOption = "", double X = 0.1, double Y = 0.9, double TextSize = 0.03);
-   void AddHistogramFromFile(TFile &File, string HistogramName,
-      string PlotOption = "", bool LogY = false, bool LogZ = false, bool Grid = false, bool LogX = false);
-   void Add4PanelHistogramFromFile(TFile &File, string HistogramName1, string HistogramName2,
-      string HistogramName3, string HistogramName4,
-      string PlotOption = "", bool LogY = false, bool LogZ = false, bool Grid = false, bool LogX = false);
-   void AddGraphFromFile(TFile &File, string GraphName,
-      string PlotOption = "", bool LogY = false, bool LogZ = false, bool Grid = false, bool LogX = false);
-   void AddPlot(TTree *Tree, string ToPlot, string Selection, string PlotOption = "", string Titles = ";;",
+   template <class PlotType> void AddPlotWithText(PlotType *Histogram, std::string Text,
+      std::string PlotOption = "", double X = 0.1, double Y = 0.9, double TextSize = 0.03);
+   template <class PlotType> void AddPlotWithText(PlotType &Histogram, std::string Text,
+      std::string PlotOption = "", double X = 0.1, double Y = 0.9, double TextSize = 0.03);
+   void AddHistogramFromFile(TFile &File, std::string HistogramName,
+      std::string PlotOption = "", bool LogY = false, bool LogZ = false, bool Grid = false, bool LogX = false);
+   void Add4PanelHistogramFromFile(TFile &File, std::string HistogramName1, std::string HistogramName2,
+      std::string HistogramName3, std::string HistogramName4,
+      std::string PlotOption = "", bool LogY = false, bool LogZ = false, bool Grid = false, bool LogX = false);
+   void AddGraphFromFile(TFile &File, std::string GraphName,
+      std::string PlotOption = "", bool LogY = false, bool LogZ = false, bool Grid = false, bool LogX = false);
+   void AddPlot(TTree *Tree, std::string ToPlot, std::string Selection, std::string PlotOption = "", std::string Titles = ";;",
       int Bin = 100, double Min = 0, double Max = 100,
       bool LogY = false, bool LogZ = false, bool Grid = false, bool LogX = false);
-   void AddPlotProfile(TTree *Tree, string ToPlot, string Selection, string PlotOption = "prof", string Titles = ";;",
+   void AddPlotProfile(TTree *Tree, std::string ToPlot, std::string Selection, std::string PlotOption = "prof", std::string Titles = ";;",
       int Bin = 100, double Min = 0, double Max = 100,
       bool LogY = false, bool LogZ = false, bool Grid = false, bool LogX = false);
-   void AddPlot2D(TTree *Tree, string ToPlot, string Selection, string PlotOption = "", string Titles = ";;",
+   void AddPlot2D(TTree *Tree, std::string ToPlot, std::string Selection, std::string PlotOption = "", std::string Titles = ";;",
       int BinX = 100, double MinX = 0, double MaxX = 100,
       int BinY = 100, double MinY = 0, double MaxY = 100,
       bool LogY = false, bool LogZ = false, bool Grid = false, bool LogX = false);
-   void AddPlotProfile2D(TTree *Tree, string ToPlot, string Selection, string PlotOption = "colz", string Titles = ";;",
+   void AddPlotProfile2D(TTree *Tree, std::string ToPlot, std::string Selection, std::string PlotOption = "colz", std::string Titles = ";;",
       int BinX = 100, double MinX = 0, double MaxX = 100,
       int BinY = 100, double MinY = 0, double MaxY = 100,
       bool LogY = false, bool LogZ = false, bool Grid = false, bool LogX = false);
    void AddCanvas(TCanvas *Canvas);
    void AddCanvas(TCanvas &Canvas);
-   void AddCanvasWithText(TCanvas *Canvas, string Text, double X = 0.1, double Y = 0.9, double TextSize = 0.03);
-   void AddCanvasWithText(TCanvas &Canvas, string Text, double X = 0.1, double Y = 0.9, double TextSize = 0.03);
-   void AddTextPage(string Text, double TextSize = 0.05);
-   void AddTextPage(string Text, double X, double Y, double TextSize = 0.05);
-   void AddTextPage(vector<string> Text, double X = 0.1, double Y = 0.9, double TextSize = 0.04);
+   void AddCanvasWithText(TCanvas *Canvas, std::string Text, double X = 0.1, double Y = 0.9, double TextSize = 0.03);
+   void AddCanvasWithText(TCanvas &Canvas, std::string Text, double X = 0.1, double Y = 0.9, double TextSize = 0.03);
+   void AddTextPage(std::string Text, double TextSize = 0.05);
+   void AddTextPage(std::string Text, double X, double Y, double TextSize = 0.05);
+   void AddTextPage(std::vector<std::string> Text, double X = 0.1, double Y = 0.9, double TextSize = 0.04);
    void AddTimeStampPage();
-   void AddTableOfContentPage(vector<string> Items, vector<string> Destinations,
+   void AddTableOfContentPage(std::vector<std::string> Items, std::vector<std::string> Destinations,
       double X = 0.11, double Y = 0.8, double TextSize = 0.03);
 public:
-   void PrintStringToPdfFile(string String);
-   void PrintLineToPdfFile(string Line);
-   void InsertNamedDestination(string Name);
-   void InsertBallLinkAbsolute(int X, int Y, int Radius, string Destination);
-   void InsertHomeButtonAbsolute(double X, double Y, double Size, string Destination);
-   void SetAutomaticHomeButton(bool newvalue = true, string Destination = "HomePage",
+   void PrintStringToPdfFile(std::string String);
+   void PrintLineToPdfFile(std::string Line);
+   void InsertNamedDestination(std::string Name);
+   void InsertBallLinkAbsolute(int X, int Y, int Radius, std::string Destination);
+   void InsertHomeButtonAbsolute(double X, double Y, double Size, std::string Destination);
+   void SetAutomaticHomeButton(bool newvalue = true, std::string Destination = "HomePage",
       double X = 0.97, double Y = 0.97, double Size = 0.03);
    void SetPageNumber(bool printnumber);
    void InsertPageNumber(TCanvas &Canvas, int PageNumber = -1);
@@ -129,7 +139,7 @@ PdfFileHelper::PdfFileHelper()
    NextPageNumber = 1;
 }
 
-PdfFileHelper::PdfFileHelper(string filename)
+PdfFileHelper::PdfFileHelper(std::string filename)
 {
    Option = "Landscape";
 
@@ -144,7 +154,7 @@ PdfFileHelper::PdfFileHelper(string filename)
    Open(filename);
 }
 
-PdfFileHelper::PdfFileHelper(string filename, string option)
+PdfFileHelper::PdfFileHelper(std::string filename, std::string option)
 {
    Option = option;
    
@@ -165,7 +175,7 @@ PdfFileHelper::~PdfFileHelper()
       Close();
 }
 
-void PdfFileHelper::Open(string filename)
+void PdfFileHelper::Open(std::string filename)
 {
    FileName = filename;
 
@@ -196,22 +206,22 @@ void PdfFileHelper::Close()
    NextPageNumber = -1;
 }
 
-string PdfFileHelper::GetFileName()
+std::string PdfFileHelper::GetFileName()
 {
    return FileName;
 }
 
-void PdfFileHelper::SetOption(string option)
+void PdfFileHelper::SetOption(std::string option)
 {
    Option = option;
 }
 
-string PdfFileHelper::GetOption()
+std::string PdfFileHelper::GetOption()
 {
    return Option;
 }
 
-template <class PlotType> void PdfFileHelper::AddPlot(PlotType *Histogram, string PlotOption, bool LogY, bool LogZ, bool Grid, bool LogX)
+template <class PlotType> void PdfFileHelper::AddPlot(PlotType *Histogram, std::string PlotOption, bool LogY, bool LogZ, bool Grid, bool LogX)
 {
    if(Histogram == NULL)
       return;
@@ -237,7 +247,7 @@ template <class PlotType> void PdfFileHelper::AddPlot(PlotType *Histogram, strin
 }
 
 template <class PlotType> void PdfFileHelper::Add4PanelPlot(PlotType *Histogram1, PlotType *Histogram2,
-   PlotType *Histogram3, PlotType *Histogram4, string PlotOption, bool LogY, bool LogZ, bool Grid, bool LogX)
+   PlotType *Histogram3, PlotType *Histogram4, std::string PlotOption, bool LogY, bool LogZ, bool Grid, bool LogX)
 {
    TCanvas canvas;
 
@@ -271,18 +281,18 @@ template <class PlotType> void PdfFileHelper::Add4PanelPlot(PlotType *Histogram1
    AddCanvas(canvas);
 }
 
-template <class PlotType> void PdfFileHelper::AddPlot(PlotType &Histogram, string PlotOption, bool LogY, bool LogZ, bool Grid, bool LogX)
+template <class PlotType> void PdfFileHelper::AddPlot(PlotType &Histogram, std::string PlotOption, bool LogY, bool LogZ, bool Grid, bool LogX)
 {
    AddPlot(&Histogram, PlotOption, LogY, LogZ, Grid, LogX);
 }
 
 template <class PlotType> void Add4PanelPlot(PlotType &Histogram1, PlotType &Histogram2,
-   PlotType &Histogram3, PlotType &Histogram4, string PlotOption, bool LogY, bool LogZ, bool Grid, bool LogX)
+   PlotType &Histogram3, PlotType &Histogram4, std::string PlotOption, bool LogY, bool LogZ, bool Grid, bool LogX)
 {
    Add4PanelPlot(&Histogram1, &Histogram2, &Histogram3, &Histogram4, PlotOption, LogY, LogZ, Grid, LogX);
 }
 
-template <class PlotType> void PdfFileHelper::AddNormalizedPlot(PlotType *Histogram, string PlotOption,
+template <class PlotType> void PdfFileHelper::AddNormalizedPlot(PlotType *Histogram, std::string PlotOption,
    bool LogY, bool LogZ, bool Grid)
 {
    if(Histogram == NULL)
@@ -308,14 +318,14 @@ template <class PlotType> void PdfFileHelper::AddNormalizedPlot(PlotType *Histog
    AddCanvas(canvas);
 }
 
-template <class PlotType> void PdfFileHelper::AddNormalizedPlot(PlotType &Histogram, string PlotOption,
+template <class PlotType> void PdfFileHelper::AddNormalizedPlot(PlotType &Histogram, std::string PlotOption,
    bool LogY, bool LogZ, bool Grid)
 {
    AddNormalizedPlot(&Histogram, PlotOption, LogY, LogZ, Grid);
 }
 
-template <class PlotType> void PdfFileHelper::AddPlotWithText(PlotType *Histogram, string Text,
-   string PlotOption, double X, double Y, double TextSize)
+template <class PlotType> void PdfFileHelper::AddPlotWithText(PlotType *Histogram, std::string Text,
+   std::string PlotOption, double X, double Y, double TextSize)
 {
    TCanvas canvas;
 
@@ -324,13 +334,13 @@ template <class PlotType> void PdfFileHelper::AddPlotWithText(PlotType *Histogra
    AddCanvasWithText(canvas, Text, X, Y, TextSize);
 }
 
-template <class PlotType> void PdfFileHelper::AddPlotWithText(PlotType &Histogram, string Text,
-   string PlotOption, double X, double Y, double TextSize)
+template <class PlotType> void PdfFileHelper::AddPlotWithText(PlotType &Histogram, std::string Text,
+   std::string PlotOption, double X, double Y, double TextSize)
 {
    AddPlotWithText(&Histogram, Text, PlotOption, X, Y, TextSize);
 }
 
-void PdfFileHelper::AddHistogramFromFile(TFile &File, string HistogramName, string PlotOption, bool LogY,
+void PdfFileHelper::AddHistogramFromFile(TFile &File, std::string HistogramName, std::string PlotOption, bool LogY,
    bool LogZ, bool Grid, bool LogX)
 {
    TH1 *Histogram = (TH1 *)File.Get(HistogramName.c_str());
@@ -340,8 +350,8 @@ void PdfFileHelper::AddHistogramFromFile(TFile &File, string HistogramName, stri
    AddPlot(Histogram, PlotOption, LogY, LogZ, Grid, LogX);
 }
 
-void PdfFileHelper::Add4PanelHistogramFromFile(TFile &File, string HistogramName1, string HistogramName2,
-   string HistogramName3, string HistogramName4, string PlotOption, bool LogY, bool LogZ, bool Grid, bool LogX)
+void PdfFileHelper::Add4PanelHistogramFromFile(TFile &File, std::string HistogramName1, std::string HistogramName2,
+   std::string HistogramName3, std::string HistogramName4, std::string PlotOption, bool LogY, bool LogZ, bool Grid, bool LogX)
 {
    TH1 *Histograms[4];
 
@@ -353,7 +363,7 @@ void PdfFileHelper::Add4PanelHistogramFromFile(TFile &File, string HistogramName
    Add4PanelPlot(Histograms[0], Histograms[1], Histograms[2], Histograms[3], PlotOption, LogY, LogZ, Grid, LogX);
 }
 
-void PdfFileHelper::AddGraphFromFile(TFile &File, string GraphName, string PlotOption, bool LogY, bool LogZ,
+void PdfFileHelper::AddGraphFromFile(TFile &File, std::string GraphName, std::string PlotOption, bool LogY, bool LogZ,
    bool Grid, bool LogX)
 {
    TGraph *Graph = (TGraph *)File.Get(GraphName.c_str());
@@ -363,7 +373,7 @@ void PdfFileHelper::AddGraphFromFile(TFile &File, string GraphName, string PlotO
    AddPlot(Graph, PlotOption, LogY, LogZ, Grid, LogX);
 }
    
-void PdfFileHelper::AddPlot(TTree *Tree, string ToPlot, string Selection, string PlotOption, string Titles,
+void PdfFileHelper::AddPlot(TTree *Tree, std::string ToPlot, std::string Selection, std::string PlotOption, std::string Titles,
    int Bin, double Min, double Max,
    bool LogY, bool LogZ, bool Grid, bool LogX)
 {
@@ -378,7 +388,7 @@ void PdfFileHelper::AddPlot(TTree *Tree, string ToPlot, string Selection, string
    AddPlot(H, PlotOption, LogY, LogZ, Grid, LogX);
 }
 
-void PdfFileHelper::AddPlotProfile(TTree *Tree, string ToPlot, string Selection, string PlotOption, string Titles,
+void PdfFileHelper::AddPlotProfile(TTree *Tree, std::string ToPlot, std::string Selection, std::string PlotOption, std::string Titles,
    int Bin, double Min, double Max,
    bool LogY, bool LogZ, bool Grid, bool LogX)
 {
@@ -393,7 +403,7 @@ void PdfFileHelper::AddPlotProfile(TTree *Tree, string ToPlot, string Selection,
    AddPlot(H, PlotOption, LogY, LogZ, Grid, LogX);
 }
 
-void PdfFileHelper::AddPlot2D(TTree *Tree, string ToPlot, string Selection, string PlotOption, string Titles,
+void PdfFileHelper::AddPlot2D(TTree *Tree, std::string ToPlot, std::string Selection, std::string PlotOption, std::string Titles,
    int BinX, double MinX, double MaxX,
    int BinY, double MinY, double MaxY,
    bool LogY, bool LogZ, bool Grid, bool LogX)
@@ -409,7 +419,7 @@ void PdfFileHelper::AddPlot2D(TTree *Tree, string ToPlot, string Selection, stri
    AddPlot(H, PlotOption, LogY, LogZ, Grid, LogX);
 }
 
-void PdfFileHelper::AddPlotProfile2D(TTree *Tree, string ToPlot, string Selection, string PlotOption, string Titles,
+void PdfFileHelper::AddPlotProfile2D(TTree *Tree, std::string ToPlot, std::string Selection, std::string PlotOption, std::string Titles,
    int BinX, double MinX, double MaxX,
    int BinY, double MinY, double MaxY,
    bool LogY, bool LogZ, bool Grid, bool LogX)
@@ -444,7 +454,7 @@ void PdfFileHelper::AddCanvas(TCanvas &Canvas)
    AddCanvas(&Canvas);
 }
 
-void PdfFileHelper::AddCanvasWithText(TCanvas *Canvas, string Text, double X, double Y, double TextSize)
+void PdfFileHelper::AddCanvasWithText(TCanvas *Canvas, std::string Text, double X, double Y, double TextSize)
 {
    Canvas->cd();
 
@@ -461,12 +471,12 @@ void PdfFileHelper::AddCanvasWithText(TCanvas *Canvas, string Text, double X, do
       InsertHomeButtonAbsolute(HomeButtonX, HomeButtonY, HomeButtonSize, HomeButtonDestination);
 }
 
-void PdfFileHelper::AddCanvasWithText(TCanvas &Canvas, string Text, double X, double Y, double TextSize)
+void PdfFileHelper::AddCanvasWithText(TCanvas &Canvas, std::string Text, double X, double Y, double TextSize)
 {
    AddCanvasWithText(&Canvas, Text, X, Y, TextSize);
 }
 
-void PdfFileHelper::AddTextPage(string Text, double TextSize)
+void PdfFileHelper::AddTextPage(std::string Text, double TextSize)
 {
    TCanvas canvas;
 
@@ -485,7 +495,7 @@ void PdfFileHelper::AddTextPage(string Text, double TextSize)
       InsertHomeButtonAbsolute(HomeButtonX, HomeButtonY, HomeButtonSize, HomeButtonDestination);
 }
 
-void PdfFileHelper::AddTextPage(string Text, double X, double Y, double TextSize)
+void PdfFileHelper::AddTextPage(std::string Text, double X, double Y, double TextSize)
 {
    TCanvas canvas;
 
@@ -503,11 +513,11 @@ void PdfFileHelper::AddTextPage(string Text, double X, double Y, double TextSize
       InsertHomeButtonAbsolute(HomeButtonX, HomeButtonY, HomeButtonSize, HomeButtonDestination);
 }
 
-void PdfFileHelper::AddTextPage(vector<string> Text, double X, double Y, double TextSize)
+void PdfFileHelper::AddTextPage(std::vector<std::string> Text, double X, double Y, double TextSize)
 {
    TCanvas canvas;
 
-   vector<TLatex *> texts;
+   std::vector<TLatex *> texts;
 
    for(int i = 0; i < (int)Text.size(); i++)
    {
@@ -537,13 +547,13 @@ void PdfFileHelper::AddTimeStampPage()
 {
    time_t CurrentTime = time(NULL);
 
-   string str = "Generated at ";
+   std::string str = "Generated at ";
    str = str + ctime(&CurrentTime);
 
    AddTextPage(str);
 }
 
-void PdfFileHelper::AddTableOfContentPage(vector<string> Items, vector<string> Destinations, double X, double Y,
+void PdfFileHelper::AddTableOfContentPage(std::vector<std::string> Items, std::vector<std::string> Destinations, double X, double Y,
    double TextSize)
 {
    cout << "Table of content not inplemented yet!" << endl;
@@ -552,7 +562,7 @@ void PdfFileHelper::AddTableOfContentPage(vector<string> Items, vector<string> D
 
    TCanvas canvas;
 
-   vector<TLatex *> texts;
+   std::vector<TLatex *> texts;
 
    texts.push_back(new TLatex(0.37, Y + 0.1, "Table of Contents"));
    texts[0]->SetName("TextLine00000");
@@ -589,7 +599,7 @@ void PdfFileHelper::AddTableOfContentPage(vector<string> Items, vector<string> D
       double Y1 = canvas.YtoPixel(1 - (Y - i * TextSize * 1.5) + TextSize * 0.2) * MagicNumber;
       double Y2 = canvas.YtoPixel(1 - (Y - i * TextSize * 1.5) - TextSize * 1) * MagicNumber;
 
-      stringstream box;
+      std::stringstream box;
       box << "[ /Rect [" << X1 << " " << Y1 << " " << X2 << " " << Y2 << "]";
 
       PrintLineToPdfFile("");
@@ -606,7 +616,7 @@ void PdfFileHelper::AddTableOfContentPage(vector<string> Items, vector<string> D
    texts.clear();
 }
 
-void PdfFileHelper::PrintStringToPdfFile(string String)
+void PdfFileHelper::PrintStringToPdfFile(std::string String)
 {
    TPDF *PDFHandle = (TPDF *)gROOT->GetListOfSpecials()->FindObject(FileName.c_str());
    if(PDFHandle == NULL)   // something's wrong.  file not opened yet?   anyways do nothing.
@@ -615,12 +625,12 @@ void PdfFileHelper::PrintStringToPdfFile(string String)
    PDFHandle->PrintStr(String.c_str());
 }
 
-void PdfFileHelper::PrintLineToPdfFile(string Line)
+void PdfFileHelper::PrintLineToPdfFile(std::string Line)
 {
    PrintStringToPdfFile(Line + "\n");
 }
 
-void PdfFileHelper::InsertNamedDestination(string Name)
+void PdfFileHelper::InsertNamedDestination(std::string Name)
 {
    cout << "Print string to PS file not implemented yet!" << endl;
 
@@ -633,15 +643,15 @@ void PdfFileHelper::InsertNamedDestination(string Name)
    PrintLineToPdfFile("");
 }
 
-void PdfFileHelper::InsertBallLinkAbsolute(int X, int Y, int Radius, string Destination)
+void PdfFileHelper::InsertBallLinkAbsolute(int X, int Y, int Radius, std::string Destination)
 {
    cout << "Print string to PS file not implemented yet!" << endl;
 
    return;
 
-   stringstream str1;
+   std::stringstream str1;
    str1 << "newpath " << X << " " << Y << " " << Radius << " 0 360 arc";
-   stringstream str2;
+   std::stringstream str2;
    str2 << "[ /Rect [" << X - Radius << " " << Y - Radius
       << " " << X + Radius << " " << Y + Radius << "]";
 
@@ -657,7 +667,7 @@ void PdfFileHelper::InsertBallLinkAbsolute(int X, int Y, int Radius, string Dest
    PrintLineToPdfFile("");
 }
 
-void PdfFileHelper::InsertHomeButtonAbsolute(double X, double Y, double Size, string Destination)
+void PdfFileHelper::InsertHomeButtonAbsolute(double X, double Y, double Size, std::string Destination)
 {
    double H = 0.4;   // height and width of the small box in the bottom, in units of "Size"
    double W = 0.75;
@@ -698,15 +708,15 @@ void PdfFileHelper::InsertHomeButtonAbsolute(double X, double Y, double Size, st
       sprintf(TempString, " %f %f ", X, Y);
       
       if(i == 0)
-         PrintStringToPdfFile(string(TempString) + " m");
+         PrintStringToPdfFile(std::string(TempString) + " m");
       else
-         PrintStringToPdfFile(string(TempString) + " l");
+         PrintStringToPdfFile(std::string(TempString) + " l");
       
    }
    PrintLineToPdfFile(" f*");
    
    /*
-   stringstream box;
+   std::stringstream box;
    box << "[ /Rect [" << PDFHandle->UtoPDF(LowerLeftX) << " " << PDFHandle->VtoPDF(LowerLeftY) << " "
       << PDFHandle->UtoPDF(LowerLeftX + Size) << " " << PDFHandle->VtoPDF(LowerLeftY + Size) << "]";
 
@@ -722,7 +732,7 @@ void PdfFileHelper::InsertHomeButtonAbsolute(double X, double Y, double Size, st
    */
 }
 
-void PdfFileHelper::SetAutomaticHomeButton(bool newvalue, string Destination, double X, double Y, double Size)
+void PdfFileHelper::SetAutomaticHomeButton(bool newvalue, std::string Destination, double X, double Y, double Size)
 {
    AutomaticHomeButton = newvalue;
    HomeButtonDestination = Destination;
