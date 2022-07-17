@@ -24,7 +24,7 @@ Prepare:
 Execute: source/FillHistograms.cpp library/Histograms.o library/HelperFunctions.o library/L1Classes.so library/Messenger.o
 	g++ `root-config --cflags --glibs` source/FillHistograms.cpp -Iinclude -I$(ProjectBase)/CommonCode/include -o Execute \
 		`fastjet-config --cxxflags --libs` -std=c++17 \
-		$(ProjectBase)/CommonCode/library/TauHelperFunctions3.o \
+		$(ProjectBase)/CommonCode/library/FourVector.o \
 		library/Messenger.o library/L1Classes.so \
 		library/Histograms.o library/HelperFunctions.o
 
