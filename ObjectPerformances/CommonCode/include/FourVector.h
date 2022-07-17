@@ -1,6 +1,6 @@
 //----------------------------------------------------------------------------
-#ifndef TauHelperFunctions_H
-#define TauHelperFunctions_H
+#ifndef FourVector_H
+#define FourVector_H
 //----------------------------------------------------------------------------
 // FourVector class - with a lot of extra setters and getter
 // Author: Yi Chen (original version on 6624)
