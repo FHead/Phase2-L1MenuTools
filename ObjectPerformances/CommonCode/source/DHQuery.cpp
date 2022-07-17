@@ -1,3 +1,13 @@
+
+// DHQuery - helper executable to browse DHFile contents
+//
+// Usage:
+//    DHQuery Data.dh   // lists all the available states
+//    DHQuery Data.dh State   // lists all the key-value pair in state named "State"
+//
+// Author: Yi Chen (chen.yi.first@gmail.com)
+
+
 #include <iostream>
 using namespace std;
 
