@@ -8,7 +8,7 @@ using namespace std;
 #include "TFile.h"
 #include "TTree.h"
 
-#include "TauHelperFunctions3.h"
+#include "FourVector.h"
 
 #include "L1AnalysisCSCTFDataFormat.h"
 #include "L1AnalysisL1MenuDataFormat.h"
